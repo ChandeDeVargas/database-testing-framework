@@ -49,7 +49,7 @@ class TestReferentialIntegrity:
         print(f"\nReferential Integrity: All {len(sample_orders)} orders have valid users")
     
     
-    def test_no_orphaned_order_items(self, db_session, sample_orders):
+    def test_no_orphaned_order_items(self, db_session):
         """
         Test: No order items exist without a valid order
         
@@ -78,7 +78,7 @@ class TestReferentialIntegrity:
         print(f"\nReferential Integrity: All order items have valid orders")
     
     
-    def test_no_orphaned_order_items_products(self, db_session, sample_orders):
+    def test_no_orphaned_order_items_products(self, db_session):
         """
         Test: No order items reference deleted products
         
@@ -107,7 +107,7 @@ class TestReferentialIntegrity:
         print(f"\nReferential Integrity: All order items reference valid products")
     
     
-    def test_detect_orphaned_records_after_deletion(self, db_session, sample_users, sample_orders):
+    def test_detect_orphaned_records_after_deletion(self, db_session, sample_users):
         """
         Test: Deleting a user creates orphaned orders (CASCADE not configured)
         
@@ -189,7 +189,7 @@ class TestForeignKeyConstraints:
             db_session.rollback()
     
     
-    def test_cascade_delete_behavior(self, db_session, sample_users, sample_orders):
+    def test_cascade_delete_behavior(self, db_session, sample_users):
         """
         Test: What happens when we delete a user with orders?
         
@@ -339,7 +339,7 @@ class TestDataConsistency:
     - Prices are positive
     """
     
-    def test_order_total_matches_items_sum(self, db_session, sample_orders):
+    def test_order_total_matches_items_sum(self, sample_orders):
         """
         Test: Order total_amount equals sum of (quantity * price) for all items
         
@@ -378,7 +378,7 @@ class TestDataConsistency:
         print(f"\nData Consistency: All {len(sample_orders)} order totals are correct")
     
     
-    def test_negative_stock_detection(self, db_session, sample_products):
+    def test_negative_stock_detection(self, db_session):
         """
         Test: No products have negative stock
         
@@ -400,7 +400,7 @@ class TestDataConsistency:
         print(f"\nStock Validation: All products have non-negative stock")
     
     
-    def test_negative_price_detection(self, db_session, sample_products):
+    def test_negative_price_detection(self, db_session):
         """
         Test: No products have negative or zero price
         
