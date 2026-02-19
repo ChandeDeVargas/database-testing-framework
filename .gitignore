@@ -1,0 +1,29 @@
+@"
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+db/
+
+# Reports
+reports/*.html
+reports/*.json
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pytest
+.pytest_cache/
+"@ | Set-Content .gitignore

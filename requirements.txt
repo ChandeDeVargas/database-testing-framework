@@ -1,0 +1,8 @@
+pytest==7.4.0
+pytest-html==4.1.1
+SQLAlchemy>=2.0.30
+psycopg2-binary==2.9.11
+PyMySQL==1.1.0
+colorama==0.4.6
+pandas>=2.2.3
+faker==20.1.0
