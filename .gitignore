@@ -1,10 +1,14 @@
-@"
 # Python
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 venv/
 env/
+ENV/
+*.egg-info/
+dist/
+build/
 
 # Database files
 *.db
@@ -12,18 +16,26 @@ env/
 *.sqlite3
 db/
 
-# Reports
+# Reports (keep structure, not files)
 reports/*.html
 reports/*.json
+!reports/.gitkeep
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
 # Pytest
 .pytest_cache/
-"@ | Set-Content .gitignore
+.coverage
+htmlcov/
+
+# Logs
+*.log
