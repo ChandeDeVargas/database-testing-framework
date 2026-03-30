@@ -6,6 +6,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import declarative_base
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Base for ORM models
 Base = declarative_base()
@@ -37,20 +41,31 @@ class DatabaseConfig:
         
         if self.db_type == 'sqlite':
             # SQLite - Local file database (for development)
-            db_path = os.path.join('db', 'test_database.db')
+            db_path = os.getenv('SQLITE_DB_PATH', os.path.join('db', 'test_database.db'))
             connection_string = f'sqlite:///{db_path}'
             
         elif self.db_type == 'postgresql':
             # PostgreSQL - Production-like database
-            # Change these to your actual PostgreSQL credentials
+            db_user = os.getenv('DB_USER', 'postgres')
+            db_password = os.getenv('DB_PASSWORD', 'postgres')
+            db_host = os.getenv('DB_HOST', 'localhost')
+            db_port = os.getenv('DB_PORT', '5432')
+            db_name = os.getenv('DB_NAME', 'testdb')
+            
             connection_string = (
-                'postgresql://postgres:postgres@localhost:5432/testdb'
+                f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
             )
             
         elif self.db_type == 'mysql':
             # MySQL - Another production option
+            db_user = os.getenv('DB_USER', 'root')
+            db_password = os.getenv('DB_PASSWORD', 'password')
+            db_host = os.getenv('DB_HOST', 'localhost')
+            db_port = os.getenv('DB_PORT', '3306')
+            db_name = os.getenv('DB_NAME', 'testdb')
+            
             connection_string = (
-                'mysql+pymysql://root:password@localhost:3306/testdb'
+                f'mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
             )
         
         else:
